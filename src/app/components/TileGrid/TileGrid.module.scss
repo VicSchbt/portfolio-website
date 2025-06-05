@@ -1,0 +1,21 @@
+@import '@/app/styles/mixins.scss';
+
+
+.tileGrid {
+    display: grid;
+    gap: 1.5rem;
+    padding: 2rem;
+
+    // Mobile (default)
+    grid-template-columns: repeat(4, 1fr);
+
+    // Tablet
+    @include respond(tablet){
+        grid-template-columns: repeat(6, 1fr);
+    }
+
+    // Desktop
+    @include respond(desktop) {
+        grid-template-columns: repeat(8, 1fr);
+    }
+}
