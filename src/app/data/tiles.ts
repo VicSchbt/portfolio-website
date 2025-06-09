@@ -1,4 +1,5 @@
 export type TileCategory =
+  | 'all'
   | 'about'
   | 'project'
   | 'resume'

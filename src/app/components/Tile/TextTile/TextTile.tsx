@@ -5,11 +5,13 @@ import styles from './TextTile.module.scss';
 interface TextTileProps {
   tile: TileData;
   orientation?: 'horizontal' | 'vertical';
+  isVisible: boolean;
 }
 
 const TextTile = ({
   tile,
   orientation = undefined,
+  isVisible,
 }: TextTileProps) => {
   return (
     <Tile
@@ -18,6 +20,7 @@ const TextTile = ({
       category={tile.category}
       orientation={orientation}
       className={styles.textTile}
+      isVisible={isVisible}
     >
       <h3>{tile.title}</h3>
       {tile.description && <p>{tile.description}</p>}
