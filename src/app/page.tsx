@@ -22,11 +22,18 @@ export default function HomePage() {
         <h1
           style={{ fontSize: '2rem', marginBottom: '1rem' }}
         >
-          Welcome to my portfolio
+          Hi, I’m Victoire 👋
         </h1>
         <p style={{ marginBottom: '2rem' }}>
-          I create interactive and aesthetic web experiences
-          that blend code, creativity, and UX.
+          I’m a frontend developer who brings ideas to life
+          through smooth interactions, meaningful design,
+          and a touch of creative magic. I craft digital
+          experiences that don’t just work — they feel good
+          to use.
+        </p>
+        <p>
+          ↓ Explore the tiles to discover more about me, my
+          work, and how I build.
         </p>
       </motion.section>
 
