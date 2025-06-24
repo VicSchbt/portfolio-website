@@ -39,7 +39,7 @@ const Navbar = () => {
     <header className={styles.navbar}>
       <a
         href="/"
-        className={styles.logo}
+        className={styles['navbar__logo']}
         aria-label="Go to homepage"
         onClick={(e) => handleClick(e, 'hero')}
       >
@@ -47,19 +47,19 @@ const Navbar = () => {
       </a>
 
       <button
-        className={styles.hamburger}
+        className={styles['navbar__menu-button']}
         aria-label={menuOpen ? 'Close menu' : 'Open menu'}
         aria-expanded={menuOpen}
         aria-controls="main-navigation"
         onClick={handleHamburgerClick}
       >
-        <span className={styles.hamburgerBox}>
-          <span className={styles.hamburgerInner} />
+        <span className={styles['navbar__menu-icon-box']}>
+          <span className={styles['navbar__menu-icon']} />
         </span>
       </button>
 
       <nav
-        className={`${styles.nav} ${menuOpen ? styles.open : ''}`}
+        className={`${styles['navbar__links']} ${menuOpen ? styles['navbar__links--open'] : ''}`}
         id="main-navigation"
         aria-hidden={!menuOpen}
       >
@@ -67,7 +67,7 @@ const Navbar = () => {
           <a
             key={category}
             href={`#${targetId}`}
-            className={styles.navLink}
+            className={styles['navbar__link']}
             onClick={(e) => handleClick(e, targetId)}
           >
             {label}
