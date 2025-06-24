@@ -29,11 +29,10 @@ $shadow-hover: 0 1rem 2rem rgba(0, 0, 0, 0.15);
     );
 
     position: relative;
-    background-color: white;
     border-radius: $radius;
     padding: 1.5rem;
     box-shadow: $shadow-default;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
     cursor: pointer;
     overflow: hidden;
     display: flex;
@@ -42,6 +41,16 @@ $shadow-hover: 0 1rem 2rem rgba(0, 0, 0, 0.15);
     grid-column: span 4;
     aspect-ratio: 1/1;
 
+    background: rgba(255, 255, 255, 0.08); // transparent glass blase
+    backdrop-filter: blur(16px); // blur behind the tile
+    -webkit-backdrop-filter: blur(16px);
+
+    // smooth transition
+    transition:
+            transform 0.3s ease,
+            box-shadow 0.3s ease,
+            background 0.3s ease;
+
     &::before {
         content: '';
         position: absolute;
@@ -49,22 +58,22 @@ $shadow-hover: 0 1rem 2rem rgba(0, 0, 0, 0.15);
         padding: 2px;
         border-radius: inherit;
         background: var(--border-gradient);
-        background-size: 600% 600%;
+        filter: blur(60px);
         animation: borderGradient 5s ease infinite;
         -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
         -webkit-mask-composite: destination-out;
         mask-composite: exclude;
-        z-index: 1;
+        z-index: 0;
         opacity: 0;
         transition: opacity 0.3s ease;
     }
 
     &:hover {
-        transform: scale(1.02);
+        transform: scale(1.03);
         box-shadow: $shadow-hover;
 
         &::before {
-            opacity: 1;
+            opacity: 0.6;
         }
     }
 
@@ -94,12 +103,12 @@ $shadow-hover: 0 1rem 2rem rgba(0, 0, 0, 0.15);
 
         &.medium {
             &.horizontal {
-                grid-column: span 2;
-                grid-row: span 4;
-            }
-            &.vertical {
                 grid-column: span 4;
                 grid-row: span 2;
+            }
+            &.vertical {
+                grid-column: span 2;
+                grid-row: span 4;
             }
         }
 
@@ -110,23 +119,24 @@ $shadow-hover: 0 1rem 2rem rgba(0, 0, 0, 0.15);
 
         &.extraLarge {
             &.horizontal {
-                grid-column: span 4;
-                grid-row: span 8;
-            }
-            &.vertical {
                 grid-column: span 8;
                 grid-row: span 4;
             }
+            &.vertical {
+                grid-column: span 4;
+                grid-row: span 8;
+            }
         }
 
-        // Category-specific gradients
-        &.about {
-            --border-gradient: linear-gradient(270deg, #73D1D3, #BADCC3, #DBA380, #73D1D3);
-        }
 
-        &.project {
-            --border-gradient: linear-gradient(270deg, #fccd18, #eb7195, #8c1bab, #fccd18);
-        }
+    }
+    // Category-specific gradients
+    &.about {
+        --border-gradient: linear-gradient(270deg, #73D1D3, #BADCC3, #DBA380, #73D1D3);
+    }
+
+    &.project {
+        --border-gradient: linear-gradient(270deg, #fccd18, #eb7195, #8c1bab, #fccd18);
     }
 
 

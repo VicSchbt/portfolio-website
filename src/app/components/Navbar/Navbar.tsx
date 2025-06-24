@@ -1,88 +1,80 @@
 'use client';
-import styles from './Navbar.module.scss';
-import { useRouter } from 'next/navigation';
-import { useContext, useState } from 'react';
 
-import { CategoryContext } from '@/app/context/categoryContext';
-import { useReducedMotion } from 'framer-motion';
+import styles from './Navbar.module.scss';
+import { useState } from 'react';
 import { TileCategory } from '@/app/data/tiles';
-import { tileAnimationDuration } from '@/app/config/animations';
 
 interface NavLink {
   label: string;
   category: TileCategory;
-  route: string;
+  targetId: string;
 }
 
 const navLinks: NavLink[] = [
-  {
-    label: 'About',
-    category: 'about',
-    route: '/about',
-  },
-  {
-    label: 'Projects',
-    category: 'project',
-    route: '/projects',
-  },
-  {
-    label: 'Contact',
-    category: 'contact',
-    route: '/contact',
-  },
+  { label: 'About', category: 'about', targetId: 'about' },
+  { label: 'Projects', category: 'project', targetId: 'project' },
+  { label: 'Contact', category: 'contact', targetId: 'contact' },
 ];
 
 const Navbar = () => {
-  const router = useRouter();
-  const { setTargetCategory } = useContext(CategoryContext);
-  const shouldAnimate = !useReducedMotion();
+  const [announcement, setAnnouncement] = useState<string | null>(null);
+  const [menuOpen, setMenuOpen] = useState(false);
 
-  const [announcement, setAnnouncement] = useState<
-    string | null
-  >(null);
-
-  const handleNavigate = (
-    category: TileCategory,
-    route: string
-  ) => {
-    setTargetCategory(category); // trigger deflate animation on tiles
-
-    if (shouldAnimate) {
-      setAnnouncement(`Navigating to ${category}...`);
-      setTimeout(() => {
-        router.push(route);
-        setAnnouncement(null); // clear announcement after navigation
-      }, tileAnimationDuration * 1000); // match animation duration
-    } else {
-      router.push(route); // skip delay if reduced motion is requested
+  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
+    e.preventDefault();
+    const section = document.getElementById(id);
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth' });
+      setAnnouncement(`Navigated to ${id} section`);
+      window.history.pushState(null, '', `#${id}`);
+      setMenuOpen(false); // Close menu on navigation
     }
+  };
+
+  const handleHamburgerClick = () => {
+    setMenuOpen((open) => !open);
   };
 
   return (
     <header className={styles.navbar}>
-      <button
+      <a
+        href="/"
         className={styles.logo}
         aria-label="Go to homepage"
-        onClick={() => handleNavigate('all', '/')}
+        onClick={(e) => handleClick(e, 'hero')}
       >
         Victoire
+      </a>
+
+      <button
+        className={styles.hamburger}
+        aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+        aria-expanded={menuOpen}
+        aria-controls="main-navigation"
+        onClick={handleHamburgerClick}
+      >
+        <span className={styles.hamburgerBox}>
+          <span className={styles.hamburgerInner} />
+        </span>
       </button>
-      <nav className={styles.nav}>
-        {navLinks.map((link) => (
-          <button
-            key={link.category}
-            aria-live="polite"
-            role="link"
-            onClick={() =>
-              handleNavigate(link.category, link.route)
-            }
+
+      <nav
+        className={`${styles.nav} ${menuOpen ? styles.open : ''}`}
+        id="main-navigation"
+        aria-hidden={!menuOpen}
+      >
+        {navLinks.map(({ label, targetId, category }) => (
+          <a
+            key={category}
+            href={`#${targetId}`}
+            className={styles.navLink}
+            onClick={(e) => handleClick(e, targetId)}
           >
-            {link.label}
-          </button>
+            {label}
+          </a>
         ))}
       </nav>
 
-      {/* Visually hidden ARIA live region for screen reader feedback */}
       <div aria-live="polite" className="sr-only">
         {announcement}
       </div>

@@ -1,36 +1,67 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Portfolio Website
+
+A modern, interactive portfolio website built with Next.js and React. This project showcases your work, skills, and contact information using a dynamic tile-based layout and smooth animations.
+
+## Features
+
+- **Animated Tile Grid**: Projects and sections are displayed as interactive tiles.
+- **Responsive Design**: Looks great on all devices.
+- **Contact Form**: Visitors can reach out directly from the site.
+- **Customizable Sections**: Easily add or modify content.
+- **Modern UI/UX**: Clean, accessible, and visually appealing.
+
+## Tech Stack
+
+- [Next.js](https://nextjs.org/) (App Router)
+- [React](https://react.dev/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [SCSS Modules](https://sass-lang.com/)
 
 ## Getting Started
 
-First, run the development server:
+1. **Install dependencies:**
+   ```bash
+   npm install
+   # or
+   yarn install
+   ```
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+2. **Run the development server:**
+   ```bash
+   npm run dev
+   # or
+   yarn dev
+   ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+3. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Project Structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- `src/app/components/` – Reusable UI components (Navbar, Footer, Tile, TileGrid, ContactForm, etc.)
+- `src/app/data/tiles.ts` – Data for the tiles displayed on the homepage.
+- `src/app/styles/` – Global and shared SCSS styles.
+- `src/app/context/` – React context for managing categories or global state.
+- `src/app/config/` – Animation and configuration files.
 
-## Learn More
+## Customization
 
-To learn more about Next.js, take a look at the following resources:
+- **Add/Edit Tiles:**
+  - Update `src/app/data/tiles.ts` to add new projects or sections.
+- **Modify Sections:**
+  - Edit or add components in `src/app/components/`.
+- **Styling:**
+  - Update SCSS files in `src/app/styles/` or component-specific `.module.scss` files.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Deployment
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+The easiest way to deploy is with [Vercel](https://vercel.com/):
 
-## Deploy on Vercel
+1. Push your repository to GitHub.
+2. Import your project into Vercel.
+3. Follow the prompts to deploy.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+For more options, see the [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying).
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+Feel free to customize this portfolio to better reflect your personality and work!

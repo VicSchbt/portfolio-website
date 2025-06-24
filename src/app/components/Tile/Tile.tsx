@@ -12,8 +12,10 @@ interface TileProps {
   isVisible?: boolean;
   children: React.ReactNode;
   className?: string;
+  onClick?: () => void;
 }
 
+// TODO: handle HTML semantic elements (<a>, <article>, etc.)
 const Tile = ({
   size = 'medium',
   category = 'about',
@@ -21,6 +23,7 @@ const Tile = ({
   className = '',
   orientation = undefined,
   isVisible,
+  onClick,
 }: TileProps) => {
   const delay = isVisible ? tileAnimationDuration : 0;
   return (
@@ -34,6 +37,7 @@ const Tile = ({
         ease: 'easeIn',
         delay,
       }}
+      onClick={onClick}
     >
       {children}
     </motion.div>

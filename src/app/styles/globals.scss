@@ -23,12 +23,17 @@ h1, h2, h3, h4, h5, h6 {
 
 // Global styles
 body {
-  background-color: $color-background;
+  body {
+    background: #f6f6f6;
+    background-image: linear-gradient(#e6e6e6 1px, transparent 1px),
+    linear-gradient(90deg, #e6e6e6 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
   line-height: 1.5;
   color: $color-muted;
 }
 
-main {
+header, main {
   padding: 2rem;
   max-width: 1200px;
   margin: 0 auto;

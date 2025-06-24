@@ -1,0 +1,16 @@
+.textTile {
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  &.medium {
+    h3 {
+      font-size: 3rem;
+    }
+  }
+  &.small {
+    h3 {
+      font-size: 1.8rem;
+    }
+  }
+
+}

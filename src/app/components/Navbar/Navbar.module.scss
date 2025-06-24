@@ -12,24 +12,154 @@
 
 .logo {
   font-weight: 700;
-  font-size: 1.5rem;
+  font-size: 3rem;
   font-family: var(--font-heading, 'Poppins', sans-serif);
   text-decoration: none;
   color: #000;
+  transition: background-position 0.5s, color 0.2s, transform 0.2s cubic-bezier(0.4, 0.2, 0.2, 1);
+
+  &:hover {
+    background: linear-gradient(90deg, #ff6ec4, #7873f5, #1fd1f9, #ff6ec4);
+    background-size: 200% auto;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    animation: shimmer 1.5s linear infinite;
+    background-position: 200% center;
+    transform: scale(1.08);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 0% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
 }
 
 .nav {
   display: flex;
   gap: 2rem;
+  transition: right 0.3s cubic-bezier(0.4, 0.2, 0.2, 1);
 
   a {
     text-decoration: none;
     color: #333;
     font-weight: 500;
     transition: color 0.2s ease;
+    font-size: 1.5rem;
+    position: relative;
+
+    &::after {
+      content: '';
+      display: block;
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+      width: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #ff6ec4, #7873f5, #1fd1f9, #ff6ec4);
+      background-size: 200% auto;
+      border-radius: 2px;
+      transition: width 0.3s cubic-bezier(0.4, 0.2, 0.2, 1);
+    }
 
     &:hover {
       color: #000;
+
+      &::after {
+        width: 100%;
+      }
     }
+  }
+}
+
+.hamburger {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  z-index: 20;
+
+  .hamburgerBox {
+    width: 2.5rem;
+    height: 2rem;
+    display: inline-block;
+    position: relative;
+  }
+
+  .hamburgerInner {
+    display: block;
+    top: 50%;
+    margin-top: -2px;
+    width: 2.5rem;
+    height: 4px;
+    background: #333;
+    border-radius: 2px;
+    position: absolute;
+    transition: all 0.3s cubic-bezier(0.4, 0.2, 0.2, 1);
+  }
+
+  .hamburgerInner::before,
+  .hamburgerInner::after {
+    content: '';
+    display: block;
+    position: absolute;
+    width: 2.5rem;
+    height: 4px;
+    background: #333;
+    border-radius: 2px;
+    transition: all 0.3s cubic-bezier(0.4, 0.2, 0.2, 1);
+  }
+
+  .hamburgerInner::before {
+    top: -0.7rem;
+  }
+  .hamburgerInner::after {
+    bottom: -0.7rem;
+  }
+}
+
+// Hamburger open animation
+.open ~ .hamburger .hamburgerInner {
+  background: transparent;
+}
+.open ~ .hamburger .hamburgerInner::before {
+  transform: translateY(0.7rem) rotate(45deg);
+}
+.open ~ .hamburger .hamburgerInner::after {
+  transform: translateY(-0.7rem) rotate(-45deg);
+}
+
+// Responsive styles
+@media (max-width: 768px) {
+  .nav {
+    position: fixed;
+    top: 0;
+    right: -100vw;
+    height: 100vh;
+    width: 70vw;
+    max-width: 320px;
+    background: white;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 6rem 2rem 2rem 2rem;
+    gap: 2rem;
+    box-shadow: -2px 0 8px rgba(0,0,0,0.05);
+    z-index: 15;
+    pointer-events: none;
+    opacity: 0;
+  }
+  .nav.open {
+    right: 0;
+    pointer-events: auto;
+    opacity: 1;
+  }
+  .hamburger {
+    display: block;
   }
 }
